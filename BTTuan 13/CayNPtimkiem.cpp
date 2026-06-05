@@ -38,3 +38,23 @@ Node* timKiem(Node* goc, int x)
 
     return timKiem(goc->right, x);
 }
+int main()
+{
+    int a[] ={2001,2002,2006,2007,2008,2004,2005,2001,1999,2004};
+    int n = sizeof(a)/sizeof(a[0]);
+
+    Node* goc = NULL;
+
+    for(int i=0;i<n;i++)
+        goc = themNode(goc,a[i]);
+    cout << "\n\nTim nam sinh 2004\n";
+
+    Node* p = timKiem(goc,2004);
+
+    if(p != NULL)
+        cout << "Tim thay nam sinh " << p->namSinh;
+    else
+        cout << "Khong tim thay nam sinh can tim";
+
+    return 0;
+}
