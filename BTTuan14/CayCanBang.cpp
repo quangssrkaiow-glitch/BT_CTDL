@@ -82,25 +82,33 @@ Node* themNode(Node* root, int x) {
         max(height(root->left), height(root->right)) + 1;
 
     int balance = getBalance(root);
-    // Left Left
+    // trái trái
     if (balance > 1 && x < root->left->data)
         return quayPhai(root);
 
-    // Right right
+    // phải phải
     if (balance < -1 && x > root->right->data)
         return quayTrai(root);
 
-    // Left right
+    // trái phải
     if (balance > 1 && x > root->left->data) {
         root->left = quayTrai(root->left);
         return quayPhai(root);
     }
 
-    // Right Left
+    // phải trái
     if (balance < -1 && x < root->right->data) {
         root->right = quayPhai(root->right);
         return quayTrai(root);
     }
 
     return root;
+}
+// duyệt giữa LNR
+void Duyet_giua(Node* root) {
+    if (root != NULL) {
+        Duyet_giua(root->left);
+        cout << root->data << " ";
+        Duyet_giua(root->right);
+    }
 }
