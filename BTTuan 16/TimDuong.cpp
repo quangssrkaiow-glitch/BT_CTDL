@@ -60,3 +60,68 @@ void themCanh(int u, int v)
     themCuoi(ds[u], v);
     themCuoi(ds[v], u);
 }
+// BFS tim duong di ngan nhat
+void BFS(int start)
+{
+    int q[100];
+
+    int phiatruoc = 0;
+    int phiasau = -1;
+
+    daXet[start] = true;
+    q[++phiasau] = start;
+
+    while(phiatruoc <= phiasau)
+    {
+        int u = q[phiatruoc++];
+
+        Node *p = ds[u];
+
+        while(p != NULL)
+        {
+            int v = p->data;
+
+            if(!daXet[v])
+            {
+                daXet[v] = true;
+                truoc[v] = u;
+
+                q[++phiasau] = v;
+            }
+
+            p = p->next;
+        }
+    }
+}
+// in duong di
+void inDuongDi(int s, int t)
+{
+    if(!daXet[t])
+    {
+        cout << "Khong ton tai duong di!";
+        return;
+    }
+
+    int duongdi[20];
+    int n = 0;
+
+    while(t != s)
+    {
+        duongdi[n++] = t;
+        t = truoc[t];
+    }
+
+    duongdi[n++] = s;
+
+    cout << "\nDuong di tu Ha Noi den Uong Bi:\n";
+
+    for(int i = n - 1; i >= 0; i--)
+    {
+        cout << ten[duongdi[i]];
+
+        if(i > 0)
+            cout << " -> ";
+    }
+
+    cout << "\nSo canh di qua: " << n - 1;
+}
