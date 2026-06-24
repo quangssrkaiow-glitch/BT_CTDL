@@ -10,7 +10,7 @@ struct Node
 Node *ds[11];
 
 string ten[11] =
-{ư
+{
     "Ha Noi",
     "Thai Nguyen",
     "Bac Ninh",
@@ -113,8 +113,6 @@ void inDuongDi(int s, int t)
 
     duongdi[n++] = s;
 
-    cout << "\nDuong di tu Ha Noi den Uong Bi:\n";
-
     for(int i = n - 1; i >= 0; i--)
     {
         cout << ten[duongdi[i]];
@@ -124,4 +122,48 @@ void inDuongDi(int s, int t)
     }
 
     cout << "\nSo canh di qua: " << n - 1;
+}
+int main()
+{
+    // khoi tao
+    for(int i = 0; i < 11; i++)
+    {
+        ds[i] = NULL;
+        daXet[i] = false;
+        truoc[i] = -1;
+    }
+
+    // tao do thi
+    themCanh(0,1);   // Ha Noi - Thai Nguyen
+    themCanh(0,2);   // Ha Noi - Bac Ninh
+    themCanh(0,6);   // Ha Noi - Hai Duong
+    themCanh(0,8);   // Ha Noi - Phu Ly
+    themCanh(0,9);   // Ha Noi - Hoa Binh
+    themCanh(0,10);  // Ha Noi - Son Tay
+
+    themCanh(2,3);   // Bac Ninh - Bac Giang
+    themCanh(2,4);   // Bac Ninh - Uong Bi
+
+    themCanh(3,4);   // Bac Giang - Uong Bi
+
+    themCanh(4,5);   // Uong Bi - Hai Phong
+
+    themCanh(5,6);   // Hai Phong - Hai Duong
+
+    themCanh(6,7);   // Hai Duong - Hung Yen
+
+    themCanh(7,8);   // Hung Yen - Phu Ly
+
+    // tim duong tu Ha Noi den Uong Bi
+    for(int i = 0; i < 11; i++) cout << i << ": " << ten[i] << "\n";
+    int a,b;
+    cout <<"\nNhap tinh bat dau ";
+    cin >>a; 
+    cout <<"\nNhap tinh cuoi cung ";
+    cin >>b;
+    BFS(a);
+    cout <<"\nDuong di tu tinh " << ten[a]<< " den tinh " << ten[b] <<" la : ";
+    inDuongDi(a,b);
+
+    return 0;
 }
